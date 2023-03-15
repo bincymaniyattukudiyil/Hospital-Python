@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 from django.forms import forms
 from django.shortcuts import render,redirect
 from django.contrib import messages, auth
@@ -20,9 +21,7 @@ def GetLoginId(request):
 def index(request):
     return render(request, "Index.html")
 def Register(request):
-    print(request.method)
     if request.method == 'POST':
-        print('hi')
         FirstName = request.POST['FirstName']
         LastName = request.POST['LastName']
         ProfileImg = request.FILES['ProfileImg']
@@ -56,10 +55,8 @@ def Register(request):
             return redirect('Register')
     return render(request,"Register.html")
 def Login(request):
-    print("here")
     print(request.method)
     if request.method == 'POST':
-        print("here1")
 
         Username = request.POST['Username']
         Password = request.POST['Password']
@@ -69,8 +66,11 @@ def Login(request):
             userid = GetLoginId(request)
 
             items = Registration.objects.filter(id=userid)
-            print(items)
-            return render(request, "Home.html", {'items': items, 'username': Username})
+
+            if items[0].Type =='Doctor':
+                return render(request, "Home.html", {'items': items, 'username': Username})
+            else:
+                return render(request, "PatientHome.html", {'items': items, 'username': Username})
 
         else:
             return render(request, 'Index.html')
@@ -78,3 +78,110 @@ def Login(request):
 def logout(request):
     auth.logout(request)
     return render(request,"Index.html")
+def PostBlog(request):
+
+    items = BlogCategory.objects.all()
+    if request.method=='POST':
+        BlogTitle = request.POST['BlogTitle']
+        BlogCategoryID = request.POST['BlogCategoryID']
+        BlogImg = request.FILES['BlogImg']
+        BlogContent = request.POST['BlogContent']
+        BlogSummery = request.POST['BlogSummery']
+        print(BlogImg)
+        value = request.POST['PostBlog']
+        if value=='Draft':
+            BlogStatus=2
+        else:
+            BlogStatus=1
+        RegistrationID=GetLoginId(request)
+        print(BlogStatus)
+        BlogPost = Blog(BlogTitle=BlogTitle, BlogCategoryID=BlogCategoryID,
+                               BlogImg=BlogImg, BlogContent=BlogContent,
+                               BlogSummery=BlogSummery,
+                               BlogStatus=BlogStatus, RegistrationID=RegistrationID)
+        BlogPost.save()
+        if BlogStatus==1:
+            return HttpResponse("<html><body>Blog Posted Susscessfully....<a href=" '/PostBlog' ">Home</a></body></html>")
+            # messages.info(request, "Blog Posted Susscessfully....")
+        else:
+            return HttpResponse("<html><body>blog has been saved....<a href=" '/PostBlog' ">Home</a></body></html>")
+            # messages.info(request, "blog has been saved....")
+        return render(request, 'PostBlog.html',{'items':items})
+
+    return render(request, 'PostBlog.html',{'items':items})
+def ViewBlog(request):
+    item = BlogCategory.objects.all()
+    if request.method == 'POST':
+        BlogCategoryID=request.POST['BlogCategoryID']
+        print(BlogCategoryID)
+        items = Blog.objects.filter(BlogCategoryID=BlogCategoryID,BlogStatus=1)
+        return render(request, 'ViewBlog.html', {'items': items, 'item': item})
+    items = Blog.objects.filter(BlogStatus=1)
+    return render(request, 'ViewBlog.html', {'items': items,'item':item})
+def BlogDetail(request,id):
+    item = BlogCategory.objects.all()
+    items = Blog.objects.filter(id=id)
+    return render(request, 'BlogDetail.html', {'items': items, 'item': item})
+def Draft(request):
+
+    userid = GetLoginId(request)
+    items = Blog.objects.filter(BlogStatus=2,RegistrationID=userid)
+
+    return render(request, 'DraftBlogs.html', {'items': items})
+def EditBlog(request,id):
+
+    item = BlogCategory.objects.all()
+
+    if request.method == 'POST':
+        print('here i am')
+
+        BlogTitle = request.POST['BlogTitle']
+        BlogCategoryID = request.POST['BlogCategoryID']
+        BlogImg = request.FILES['BlogImg']
+        BlogContent = request.POST['BlogContent']
+        BlogSummery = request.POST['BlogSummery']
+        userid=GetLoginId(request)
+
+        print(BlogImg)
+        value = request.POST['EditBlog']
+        if value == 'Draft':
+            BlogStatus = 2
+        else:
+            BlogStatus = 1
+
+        Newitems = Blog.objects.filter(id=id).update(
+        BlogTitle = BlogTitle,
+        BlogCategoryID = BlogCategoryID,
+        BlogContent = BlogContent,
+        BlogSummery = BlogSummery,
+        RegistrationID = userid,
+        BlogStatus=BlogStatus
+        )
+
+        if BlogStatus==1:
+            return HttpResponse("<html><body>Blog Posted Susscessfully....<a href=" '/Draft' ">Home</a></body></html>")
+            # messages.info(request, "Blog Posted Susscessfully....")
+        else:
+            return HttpResponse("<html><body>blog has been saved........<a href=" '/Draft' ">Home</a></body></html>")
+            # messages.info(request, "blog has been saved....")
+        items = Blog.objects.filter(BlogStatus=2, RegistrationID=userid)
+        return render(request, 'DraftBlogs.html',{'items': items})
+    items = Blog.objects.filter(id=id)
+    return render(request, 'EditBlog.html', {'items': items, 'item': item})
+
+def ViewMyBlog(request):
+    item = BlogCategory.objects.all()
+    userid = GetLoginId(request)
+    if request.method == 'POST':
+        BlogCategoryID = request.POST['BlogCategoryID']
+        userid = GetLoginId(request)
+        print(BlogCategoryID)
+        items = Blog.objects.filter(BlogCategoryID=BlogCategoryID,RegistrationID=userid)
+        return render(request, 'ViewMyBlog.html', {'items': items, 'item': item})
+    items = Blog.objects.filter(RegistrationID=userid)
+    return render(request, 'ViewMyBlog.html', {'items': items, 'item': item})
+
+def MyBlogDetail(request,id):
+    item = BlogCategory.objects.all()
+    items = Blog.objects.filter(id=id)
+    return render(request, 'MyBlogDetail.html', {'items': items, 'item': item})

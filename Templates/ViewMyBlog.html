@@ -1,0 +1,62 @@
+{% extends 'DoctorBase.html' %}
+{% load static %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+
+  <table class="table align-left mb-4 bg-white" style="margin-left:180px; border: 1px solid #2baab1; margin-top:12px;">
+  <thead class="bg-light">
+   Blogs
+  </thead>
+      <form>
+      <div class="col-md-6 mb-4">
+                     <select name="BlogCategoryID" >
+                  {% for i in item %}
+
+                    <option  value="{{i.id}}">{{i.BlogCategoryName}}</option>
+                         {% endfor %}
+                     </select>
+                     <input class="btn btn-primary btn-lg" onclick="{% url 'ViewMyBlog' %}" type="submit" value="View" name="ViewMyBlog" />
+
+                </div>
+          </form>
+  <tbody>
+    {% for i in items %}
+     <tr>
+          <div class="ms-3">
+            <h2>{{i.BlogTitle}}</h2>
+
+          </div>
+        </div>
+
+    </tr>
+
+      <tr>
+
+        <div class="d-flex align-items-center">
+          <img
+              src="{{i.BlogImg.url}}"
+              alt=""
+              style="width: 145px; height: 145px"
+              class="rounded-circle"
+              />
+      </tr>
+    <tr>
+          <div class="ms-3">
+
+          <a href="{% url 'MyBlogDetail' i.id %}" data-toggle="tooltip" data-placement="right" title="View">{{i.BlogSummery|truncatewords:15}}</a>
+
+
+          </div>
+        </div>
+
+    </tr>
+
+
+
+  {% endfor %}
+  </tbody>
+
+  </table>
+  </form>
+{% endblock %}

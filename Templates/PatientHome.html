@@ -1,4 +1,4 @@
-{% extends 'DoctorBase.html' %}
+{% extends 'PatientBase.html' %}
 {% load static %}
 {% block content %}
 <h4> Welcome {{username}}</h4><br>
@@ -6,9 +6,9 @@
   <form method="post">
     {% csrf_token %}
 
-  <table  class="table bg-white" style="margin-left:10px; border: 1px solid #2baab1; margin-top:12px; width:500px">
+  <table class="table bg-white" style="margin-left:10px; border: 1px solid #2baab1; margin-top:12px; width:500px">
   <thead class="bg-light">
-   <h4>Your Profile</h4>
+    Your Profile
   </thead>
   <tbody>
     {% for i in items %}
@@ -24,9 +24,9 @@
               />
         </div>
       </tr>
-    <tr>
+  <tr>
         <td>
-           <h5> Doctor Name:</h5>
+           <h5> Patient Name:</h5>
         </td>
  <td>
      <h6> &nbsp &nbsp{{i.FirstName}} {{i.LastName}}</h6>
@@ -58,7 +58,7 @@
            </td>
            <td>
          <h6> &nbsp &nbsp{{i.Address}}<h6>
-      </td>
+       </td>
       </tr>
 
 

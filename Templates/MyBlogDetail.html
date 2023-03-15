@@ -1,0 +1,62 @@
+{% extends 'DoctorBase.html' %}
+{% load static %}
+{% block content %}
+
+                {% for i in items %}
+              <div class="row">
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <h1>{{i.BlogTitle}} </h1>
+
+                  </div>
+                </div>
+
+              </div>
+                 <div class="row">
+                <div class="col-12 mb-4 pb-2">
+
+                  <div class="form-outline">
+                      <p>{{i.BlogSummery}} </p>
+
+                  </div>
+
+                </div>
+
+              </div>
+             <div class="row">
+                <div class="col-md-6 mb-4">
+
+
+                     <div class="d-flex align-items-center">
+          <img
+              src="{{i.BlogImg.url}}"
+              alt=""
+              style="width: 145px; height: 145px"
+
+              />
+        </div>
+                </div>
+
+              </div>
+
+
+
+              <div class="row">
+                <div class="col-12 mb-4 pb-2">
+
+                  <div class="form-outline">
+                      <p >{{i.BlogContent}}</p>
+
+
+                  </div>
+
+                </div>
+              </div>
+
+   {% endfor %}
+
+
+
+</section>
+{% endblock %}
