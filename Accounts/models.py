@@ -21,3 +21,11 @@ class Blog(models.Model):
     BlogSummery=models.TextField()
     BlogStatus=models.IntegerField()
     RegistrationID=models.IntegerField()
+class AppointmentDtl(models.Model):
+    RegistrationID = models.ForeignKey(Registration,on_delete=models.CASCADE)
+    PatientID = models.IntegerField()
+    RequiredSpeciality = models.CharField(max_length=50)
+    AppointmentDate = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+

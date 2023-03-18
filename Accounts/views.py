@@ -1,11 +1,58 @@
+
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-from django.forms import forms
 from django.shortcuts import render,redirect
 from django.contrib import messages, auth
 from . models import *
+from django.views.generic import ListView
+import datetime
+from datetime import timedelta
 
-# Create your views here.
+from google.oauth2 import service_account
+#
+from googleapiclient.discovery import build
+# SCOPES = ["https://www.googleapis.com/auth/calendar"]
+# calendarId ='d955eb6ac5c67f05ed43d36cd7e13e35fe8589f0eeac89e5e55bf069f6ecdbd8@group.calendar.google.com'
+# # AIzaSyAJJaZmDnX1KGY8CNb_-JJDtBb0USTElAQ
+# # service_account_email = "webapi@webapi-380907.iam.gserviceaccount.com"
+# #
+# credentials = service_account.Credentials.from_service_account_file('C:/Bincy/Hospital-Python/webapi-380907-838d2b9daf9a.json')
+# scoped_credentials = credentials.with_scopes(SCOPES)
+
+
+SCOPES = ["https://www.googleapis.com/auth/calendar"]
+
+service_account_email = "hospitalcalandarapi@hospitalcalanderapi.iam.gserviceaccount.com"
+
+credentials = service_account.Credentials.from_service_account_file('C:/Bincy/Hospital-Python/hospitalcalanderapi-f9c5aa70b4f8.json')
+scoped_credentials = credentials.with_scopes(SCOPES)
+calendarId = "d955eb6ac5c67f05ed43d36cd7e13e35fe8589f0eeac89e5e55bf069f6ecdbd8@group.calendar.google.com"
+
+def build_service(request):
+
+    service = build("calendar", "v3", credentials=scoped_credentials)
+    return service
+
+
+# from django.contrib.auth import authenticate, login, logout
+#
+# import datetime
+# from datetime import timedelta
+# import pytz
+# from apiclient.discovery import build
+# import pickle
+# # from google_auth_o authlib.flow import InstalledAppFlow
+#
+# import sys
+# calendarId = "d955eb6ac5c67f05ed43d36cd7e13e35fe8589f0eeac89e5e55bf069f6ecdbd8@group.calendar.google.com"
+# start_time = 0
+# end_time = 0
+# SCOPES = ["https://www.googleapis.com/auth/calendar"]
+# credentials = service_account.Credentials.from_service_account_file('C:\\Bincy\\Hospital-Python\\webapi-380907-838d2b9daf9a.json')
+#
+# service = build("calendar", "v3", credentials=credentials)
+
+# # Create your views here.
 def GetLoginId(request):
 
     current_user = request.user
@@ -185,3 +232,52 @@ def MyBlogDetail(request,id):
     item = BlogCategory.objects.all()
     items = Blog.objects.filter(id=id)
     return render(request, 'MyBlogDetail.html', {'items': items, 'item': item})
+class DoctorsList(ListView):
+    model = Registration
+    template_name = 'DoctorsList.html'
+    context_object_name = 'items'
+def BookAppoinment(request,id):
+    service = build("calendar", "v3", credentials=scoped_credentials)
+    if request.method == 'POST':
+        print('here i am look')
+
+        items = Registration.objects.get(id=id)
+
+        req = request.POST['req']
+        start = request.POST['start']
+        time = request.POST['time']
+
+        starts = start + ' ' + time + ':' '00'
+        timezone = 'Asia/Kolkata'
+        start_time = datetime.datetime.strptime(starts, "%Y-%m-%d %H:%M:%S")
+        end_time = start_time + timedelta(minutes=45)
+        print(req)
+        context = {'req': req, 'start': start, 'time': time, 'start_time': start_time, 'end_time': end_time,
+                   'items': items}
+        service = build_service(request)
+        print("Gsfgfd", start_time.isoformat(), 'vdfdf', end_time.isoformat())
+        print("dsdv", req),
+
+        event = (
+            service.events()
+            .insert(
+                calendarId=calendarId,
+                body={
+                    "summary": req,
+
+                    "start": {"dateTime": start_time.isoformat(),
+                              'timeZone': timezone,
+
+                              },
+                    "end": {
+                        "dateTime": end_time.isoformat(),
+                        'timeZone': timezone,
+                    },
+                },
+            )
+            .execute()
+        )
+        print(event)
+        return render(request, "ConfirmBook.html",context )
+    else:
+        return render(request, "BookAppoinment.html")

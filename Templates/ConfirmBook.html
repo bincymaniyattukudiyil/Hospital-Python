@@ -1,0 +1,26 @@
+{% extends 'PatientBase.html' %}
+{% block content %}
+ <center><div class="row">
+
+      <div class="col-md-4">
+          <div class="card mb-4 box-shadow">
+ <h1>Booking Confirmed</h1>
+<h4> Doctor name       :  {{items.FirstName}} {{items.LastName}}</h4>
+<h4> appointment date :{{start}}</h4>
+<h4> start time :{{time}}</h4>
+<h4> end time :{{end_time}}</h4>
+
+    <form method="post" action="">
+        {% csrf_token %}
+    
+    <input type="text" class="form-control" value="{{req}}" name="required" hidden>
+    <input type="date" class="form-control" value="{{start}}" name="starts" hidden>
+    <input type="time" class="form-control" value="{{time}}" name="time" hidden>
+ 
+
+    </form>
+</div>
+
+</div>
+ </center>
+{% endblock %}

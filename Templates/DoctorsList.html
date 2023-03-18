@@ -1,0 +1,23 @@
+{% extends 'PatientBase.html' %}
+{% load static %}
+{% block content %}
+{% for i in items %}
+
+{% if i.Type == 'Doctor' %}
+  <div class="row">
+
+      <div class="col-md-4">
+          <div class="card mb-4 box-shadow">
+              <center><img class="card-img-top" src='{{i.ProfileImg.url}}' alt="Card image cap" style="height:100px;width:100px"><center>
+              <div class="card-body">
+                  <h5 class="card-title">{{i.FirstName}} {{i.LastName}}</h5>
+
+                  <a href="{% url 'BookAppoinment' i.id %}" class="btn btn-primary">Book an Appointment</a>
+
+              </div>
+          </div>
+      </div>
+  </div>
+{% endif %}
+{% endfor %}
+{% endblock %}
