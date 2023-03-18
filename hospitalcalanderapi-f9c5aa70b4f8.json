@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "hospitalcalanderapi",
+  "private_key_id": "f9c5aa70b4f86650f1f616b2a2b4bbb6303c7e0c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDb85k80b05Q/l0\ndb1/kzcepy2bw7lREJrwrGY8pzhUURJyStPlDzo+QcRAzWrcAeR131L9gOsavfwz\nwHEtho/cY+Ylqi+gIUV1aInvGI8zBs4oC2C/583p+U7RE8Hw+cIOHp26Or/u4eZd\nT/F4PaQFtlzTxlRIYf4bKktH2gwmRWJPaVV/DfnjgkF0d3e8jdmaKKloZ2qyd3Oo\nIsJClC/rSNUJzeNQG4YFB+S3DqwTdBksQ96ug4L1dmdqp7sANGAVnCQ8rNLl05Pj\nbPe9eeTJ+igpaj0W9rVJSE/kKXLY+kvNCjLxS8Jsyk0KoZIcADGc18VOVN5TnIdt\n7EE1HjTtAgMBAAECggEAJopPKgiIUw31mnH9E+scR+s8QyRvBuTVeWGEApG8fY29\nITi6W1MpPfpxJHe6BzXvrbXFiXT6/TMYC4tnaXZAI/p/O89PzAu4a4O3U6Vmhibl\nnb+sosO/4YUVSe5f19UzqxyzP4wG0JlVr7kP0yVd5cBYEKWaZBqDl4f4K+1pnpTL\nfrWu/PDMETaUvov+bZOvOTMC5mt7v9eBjCIm8EKsvRC81uQWABke5pFXVXigHVT6\naKJaLYpftJyW/56boCvMumH3lmLgLfNgLA3nWjIlueBlvK5e6UouSxMEvNRiXdgK\nHavnpq8mkr75TN6TDbI6m5KRGd9mDPszfk7aKhKv0QKBgQD8J/GL1uh3n4rClBeC\nR6IEYkvc8pAF3qodWObdpMiXwE2HZiNWy2T/O/zlocmesm+9L9vxBE7NxT7rBwkL\nUeqY8cnXsMyt2l26LtzyAfDYQu56WxYDE4whKXiNB8zSJHnAgXmo+76+XP3bLMwK\ntGezHfpusInJooNBtvBQN17iFQKBgQDfTfmPqMDSr84e+xwcbyfwWejbXVgZDs47\nOHfv7pUCp8+fX4p4zrNFkxPkudj/M6Bv+BBu4GvEAJTbaGNe4qIr2t/58YgkZvLx\nq/Sy8iFsHmZz8XAXMxCz/1Ls5bjcLWX7qzNTRdfNet7B4QwMPeP+RYBOb642mhY9\ntiEaq1s1eQKBgAxP5vttAuzUXXIiyQMTfFW6dvnS3jVrKeNE9ADeiuzd9uslkZQr\nWkMcKr0LqUyWad5S9+pMy4xAlVHkhgyHc20EYVamy1ex0eHFaARpE9l7aymOSQTd\nb3ovDDPWramVHlzH9ajKogWphLuu9EeRh363eALvm8q8pKwQwqsoCPoBAoGBAKcm\n9hUsK9JJ2Q/lxgAe0JWgp6Z08/ol1AgOV/EY9R+8v7S7zqpph1YgJzcCSsWVPpYx\n6RMmGGTqToMCW8ft+5i6SQgOXWtqSJbQseW1S4FkLCrD4rTq+6jRCaDcwIjHztwZ\nJd1CnaxpOg+ExwDu3xg5rDaKcKzcoKNnDtaoyCh5AoGBAMLEo8f9NRPphIlIQcQP\ncwA/IMcy7VWcbQoKqmv6ZtIsnF0AP3h9ZWrsLW2vmMha7qTJ6TXDtn9xDn1PtzJC\nJZGOGDEt9/xYwWbzaScEWevaoEK6wRckHcwdN0LegfkP6W7UClBDRSRmZq5y+LKJ\nvwwS4IHOlj1ydimSJYKU4YhG\n-----END PRIVATE KEY-----\n",
+  "client_email": "hospitalcalandarapi@hospitalcalanderapi.iam.gserviceaccount.com",
+  "client_id": "103350239194470472278",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/hospitalcalandarapi%40hospitalcalanderapi.iam.gserviceaccount.com"
+}
