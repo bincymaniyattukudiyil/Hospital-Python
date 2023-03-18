@@ -11,13 +11,6 @@ from datetime import timedelta
 from google.oauth2 import service_account
 #
 from googleapiclient.discovery import build
-# SCOPES = ["https://www.googleapis.com/auth/calendar"]
-# calendarId ='d955eb6ac5c67f05ed43d36cd7e13e35fe8589f0eeac89e5e55bf069f6ecdbd8@group.calendar.google.com'
-# # AIzaSyAJJaZmDnX1KGY8CNb_-JJDtBb0USTElAQ
-# # service_account_email = "webapi@webapi-380907.iam.gserviceaccount.com"
-# #
-# credentials = service_account.Credentials.from_service_account_file('C:/Bincy/Hospital-Python/webapi-380907-838d2b9daf9a.json')
-# scoped_credentials = credentials.with_scopes(SCOPES)
 
 
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
@@ -34,23 +27,6 @@ def build_service(request):
     return service
 
 
-# from django.contrib.auth import authenticate, login, logout
-#
-# import datetime
-# from datetime import timedelta
-# import pytz
-# from apiclient.discovery import build
-# import pickle
-# # from google_auth_o authlib.flow import InstalledAppFlow
-#
-# import sys
-# calendarId = "d955eb6ac5c67f05ed43d36cd7e13e35fe8589f0eeac89e5e55bf069f6ecdbd8@group.calendar.google.com"
-# start_time = 0
-# end_time = 0
-# SCOPES = ["https://www.googleapis.com/auth/calendar"]
-# credentials = service_account.Credentials.from_service_account_file('C:\\Bincy\\Hospital-Python\\webapi-380907-838d2b9daf9a.json')
-#
-# service = build("calendar", "v3", credentials=credentials)
 
 # # Create your views here.
 def GetLoginId(request):
