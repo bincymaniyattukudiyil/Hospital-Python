@@ -19,7 +19,7 @@ service_account_email = "hospitalcalandarapi@hospitalcalanderapi.iam.gserviceacc
 
 credentials = service_account.Credentials.from_service_account_file('C:/Bincy/Hospital-Python/hospitalcalanderapi-f9c5aa70b4f8.json')
 scoped_credentials = credentials.with_scopes(SCOPES)
-calendarId = "d955eb6ac5c67f05ed43d36cd7e13e35fe8589f0eeac89e5e55bf069f6ecdbd8@group.calendar.google.com"
+calendarId = "d955eb6ac5c67f05ed43dd7e13e359f6ecdbd8@group.calendar.google.com"
 
 def build_service(request):
 
@@ -137,6 +137,7 @@ def ViewBlog(request):
     if request.method == 'POST':
         BlogCategoryID=request.POST['BlogCategoryID']
         print(BlogCategoryID)
+        
         items = Blog.objects.filter(BlogCategoryID=BlogCategoryID,BlogStatus=1)
         return render(request, 'ViewBlog.html', {'items': items, 'item': item})
     items = Blog.objects.filter(BlogStatus=1)
